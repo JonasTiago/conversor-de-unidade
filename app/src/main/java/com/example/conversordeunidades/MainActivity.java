@@ -1,8 +1,11 @@
 package com.example.conversordeunidades;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Spinner initialSpinner = (Spinner) findViewById(R.id.initial_convert_spinner);
-        Spinner finalSpinner = (Spinner) findViewById(R.id.final_convert_spinner);
+        Spinner initialSpinner = (Spinner) findViewById(R.id.input_convert_spinner);
+        Spinner finalSpinner = (Spinner) findViewById(R.id.output_convert_spinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
@@ -42,4 +45,33 @@ public class MainActivity extends AppCompatActivity {
 
    }
 
+   public void Converter(View view){
+        Spinner inputSpinner, outputSpinner;
+        TextView valueResult;
+        EditText editInput;
+        Double result;
+
+        valueResult = findViewById(R.id.text_result);
+        editInput = findViewById(R.id.edit_Input_value);
+
+        double valueEditInput = Double.parseDouble(editInput.getText().toString());
+
+        inputSpinner = findViewById(R.id.input_convert_spinner);
+        outputSpinner = findViewById(R.id.output_convert_spinner);
+
+         var valorInputSpinner = inputSpinner.getSelectedItem();
+         var valorOutputSpinner = outputSpinner.getSelectedItem();
+
+       valueResult.setText("U$: " + String.format("%.2f", valueEditInput));
+
+        if (valorInputSpinner.equals("Metros")) {
+            if (valorOutputSpinner.equals("Centimetros")) {
+                result = valueEditInput * 100;
+            } else if (valorOutputSpinner. equals("Quilometros")) {
+                result = valueEditInput / 1000;
+            } else if (valorOutputSpinner. equals("Milhas")) {
+                result = valueEditInput / 1609.34;
+            }
+       }
+    }
 }
